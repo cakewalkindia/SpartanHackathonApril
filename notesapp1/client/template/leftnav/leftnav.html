@@ -4,7 +4,7 @@
             <a href="#" class="list-group-item active">
                 <span class="glyphicon glyphicon-folder"></span> <b>Actions</b>
             </a>
-            <a href="#" class="list-group-item" onclick="$('#divAddNotebook').modal('show');">
+            <a href="#" class="list-group-item" onclick="$('#notebookModal').modal('show');">
                 <span class="glyphicon glyphicon-folder"></span>
                 Add Notebook
             </a>
@@ -46,7 +46,25 @@
 
         </div>
 
+    <div class="modal fade" id="notebookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Create Notebook</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" id="notebookName" type="text" name="notebookname" placeholder="Name">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="createNotebook" class="btn btn-primary">Create</button>
+                    </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
