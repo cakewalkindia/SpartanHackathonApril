@@ -2,12 +2,12 @@
  * Created by Asif on 11-04-2015.
  */
 dbMongo = ({
-    Notebook : new Mongo.Collection('notebooks'),
-    Notes : new Mongo.Collection('notes'),
-    NotesTags  : new Mongo.Collection('notestags'),
-    NotesHistory : new Mongo.Collection('noteshistory'),
-    NotesAttachment : new Mongo.Collection('notesattachment'),
-    NotesShared : new Mongo.Collection('notesshared')
+    Notebook : new Mongo.Collection('col_notebooks'),
+    Notes : new Mongo.Collection('col_notes'),
+    NotesTags  : new Mongo.Collection('col_notestags'),
+    NotesHistory : new Mongo.Collection('col_noteshistory'),
+    NotesAttachment : new Mongo.Collection('col_notesattachment'),
+    NotesShared : new Mongo.Collection('col_notesshared')
 })
 
 

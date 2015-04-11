@@ -21,6 +21,10 @@ if(Meteor.isClient) {
             }
         }, getDefaultTag: function () {
 
+        },getTagsList: function () {
+
+            return dbMongo.NotesTags.find({userid: Meteor.userId()}).fetch();
+
         }
 
 

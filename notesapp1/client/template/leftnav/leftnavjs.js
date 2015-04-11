@@ -3,10 +3,30 @@
  */
 
 
-if(Meteor.isClient){
+if(Meteor.isClient) {
     Template.leftnavTemplate.events({
-        "click #btnsubmit": function(){
+        "click #btnsubmit": function () {
             colNotebook.createNotebook("testing notebook create");
         }
-    })
+    });
+
+
+    Template.leftnavTemplate.helpers(
+        {
+            notebookList: function () {
+                return colNotebook.getNotebookList();
+            },notebookscount : function(){
+
+               return colNotebook.getTotalCount();
+
+            },tagslist: function () {
+
+               return colTags.getTagsList();
+            },
+            tagsCount : function(){
+                return dbMongo.NotesTags.find().count()
+            }
+
+        }
+    )
 }
