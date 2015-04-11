@@ -25,6 +25,11 @@ if(Meteor.isClient) {
         },
         updateNotes:function(_noteid,_sharedWith){
             Meteor.call('updateNotes',_noteid,_sharedWith);
+        },
+        getNotesList:function(){
+            //Meteor.call('getNotesList');
+            return dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
+          //  return dbMongo.Notes.find().fetch();
         }
 
 
@@ -50,6 +55,9 @@ if (Meteor.isServer) {
                         }
                     });
                     dbMongo.Notes.update({_id:_noteid},{$set:{sharedWith:arrSharedWith, shared:true}});
+                },
+                'getNotesList':function(){
+                    return dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
                 }
 
             }
