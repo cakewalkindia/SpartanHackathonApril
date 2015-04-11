@@ -2,14 +2,14 @@
  * Created by Asif on 11-04-2015.
  */
 
-//dbMongo.Notebook = new Mongo.Collection('notebook');
+jNotebook = new Mongo.Collection('notebook');
 //dbMongo.Notebook
 if(Meteor.isClient) {
 
 
     colNotebook = ({
         notebookExist: function (_notebookname) {
-            var nbcount = dbMongo.Notebook.find({notebookname : _notebookname , userid: Meteor.userId() }).count();
+            var nbcount = jNotebook.find({notebookname : _notebookname , userid: Meteor.userId() }).count();
             return nbcount > 0 ? true : false;
         },
         createNotebook: function (_notebookname) {
@@ -21,9 +21,9 @@ if(Meteor.isClient) {
 
                 console.log(db.notebook);
 
-               Meteor.call("createnotebook",db.notebook);
+               Meteor.call('addNotebooks',db.notebook);
 
-               // dbMongo.Notebook.insert(db.notebook);
+               // jNotebook.insert(db.notebook);
 
             } else {
 
@@ -34,27 +34,27 @@ if(Meteor.isClient) {
             if (colNotebook.getTotalCount() <=0 ){
                 //colNotebook.createNotebook('First Notebook');
                 //return colNotebook.getNotebookList();
-                return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
+                 return jNotebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
 
             }else
             {
-                return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
+                return jNotebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
 
             }
 
 
         }, getTotalCount : function(){
-            var nbcount = dbMongo.Notebook.find({ userid: Meteor.userId() }).count();
+            var nbcount = jNotebook.find({ userid: Meteor.userId() }).count();
             return nbcount;
 
 
         }, getNotebookList : function () {
 
             if (colNotebook.getTotalCount() <=0 ){
-//                colNotebook.createNotebook('First Notebook');
+               // colNotebook.createNotebook('First Notebook');
             }
 
-            return dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch();
+            return jNotebook.find({ userid: Meteor.userId() }).fetch();
         }
 
 
@@ -65,18 +65,19 @@ if(Meteor.isClient) {
 
 
 
+
 if (Meteor.isServer) {
     Meteor.startup(function () {
+        // code to run on server at startup
+
         Meteor.methods({
-                createnotebook: function (_notebook) {
-                    dbMongo.Notebook.insert(_notebook);
-
-
+                'addNotebooks': function (objNotebook) {
+                    dbMongo.NoteBooks.insert(objNotebook);
                 }
 
             }
         )
-    });
 
+    });
 }
 

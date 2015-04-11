@@ -1,0 +1,56 @@
+<template name="leftnavTemplate">
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            <span class="glyphicon glyphicon-folder"></span> <b>Actions</b>
+        </a>
+        <a href="#" class="list-group-item" onclick="$('#divAddNotebook').modal('show');">
+            <span class="glyphicon glyphicon-folder"></span>
+            Add Notebook
+        </a>
+    </div>
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            <span class="glyphicon glyphicon-folder"></span> <b>Note Books</b> <span class="badge">{{notebookscount}}</span>
+        </a>
+
+        {{#each notebookList}}
+
+            <a href="#" class="list-group-item nb" data-loading-text="Loading..."  id={{_id}} >
+                <span class="glyphicon glyphicon-bookmark" ></span> {{notebookname}} <span class="badge">0</span>
+            </a>
+            {{else}}
+            <p>
+                No notebooks found
+            </p>
+
+
+        {{/each}}
+
+
+    </div>
+<!--
+    <div class="list-group">
+        <a href="#" class="list-group-item disabled">
+            <span class="glyphicon glyphicon-file" ></span> <b>Notes</b> <span class="badge">{{notesCount}}</span>
+        </a>
+    </div>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            <span class="glyphicon glyphicon-tags"></span> <b>Tags</b> <span class="badge">{{tagsCount}}</span>
+        </a>
+
+        {{#each tagslist}}
+
+            <a href="#" class="list-group-item" data-loading-text="Loading...">
+                <span class="glyphicon glyphicon-unchecked"></span> {{tagname}} <span class="badge">0</span>
+            </a>
+
+        {{/each}}
+
+    </div>
+-->
+</template>
+
+
+
