@@ -1,0 +1,39 @@
+/* CSS declarations go here */
+.list-group{
+    width: 99%;
+}
+
+.list-group2{
+    width: 99%;
+    line-height: 2;
+}
+
+.panelLeft {
+    width : 20%;
+    height: auto;
+    /*border: solid;
+    border-width: 2px;*/
+    float: left;
+    margin-right: 5px;
+}
+
+
+.panelCenter {
+    width : 28%;
+    height: auto;
+    /*border: solid;
+    border-width: 2px;*/
+    display: inline-block;
+
+}
+
+
+.panelRight {
+    width : 50%;
+    height: auto;
+
+    float: right;
+    margin-left: 2px;
+}
+
+
