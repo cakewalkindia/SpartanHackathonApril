@@ -5,9 +5,25 @@
 
 dbObjects = function(){
 
-    this.notebook = { notebookname:"", userid:""},
-    this.tag ={tagname:"",userid:""},
-    this.notes = {title:"", content:"",  createddate: new Date(),modifieddate:new Date(), shared:false, sharedWith:[], tags:[],notebookid:"",userid:"" }
+    this.notebook = {
+        notebookname:"",
+        userid:""
+    },
+    this.tag ={
+        tagname:"",
+        userid:""
+    },
+    this.notes = {
+        title:"",
+        content:"",
+        createddate: new Date(),
+        modifieddate:new Date(),
+        shared:false,
+        sharedWith:[],
+        tags:[],
+        notebookid:"",
+        userid:""
+    }
 
 }
 
