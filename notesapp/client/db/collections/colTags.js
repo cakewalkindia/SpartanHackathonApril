@@ -28,18 +28,3 @@ if(Meteor.isClient) {
     });
 
 }
-
-if (Meteor.isServer) {
-    Meteor.startup(function () {
-        // code to run on server at startup
-
-        Meteor.methods({
-                'addTags': function (objTag) {
-                    dbMongo.NotesTags.insert(objTag);
-                }
-
-            }
-        )
-
-    });
-}
