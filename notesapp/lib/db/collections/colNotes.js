@@ -22,7 +22,11 @@ if(Meteor.isClient) {
             db.notes.notebookid = _notebookid;
             db.notes.userid = Meteor.userId();
             Meteor.call('addNotes',db.notes);
+        },
+        updateNotes:function(_noteid,_sharedWith){
+            Meteor.call('updateNotes',_noteid,_sharedWith);
         }
+
 
 
 
@@ -37,6 +41,15 @@ if (Meteor.isServer) {
         Meteor.methods({
                 'addNotes': function (objNote) {
                     dbMongo.Notes.insert(objNote);
+                },
+                'updateNotes':function(_noteid,_sharedWith){
+                    var arrSharedWith = dbMongo.Notes.find({_id:_noteid}).fetch().sharedWith;
+                    $.each(_sharedWith, function(i,id){
+                        if(arrSharedWith.indexOf(id) == -1){
+                            arrSharedWith.push(id);
+                        }
+                    });
+                    dbMongo.Notes.update({_id:_noteid},{$set:{sharedWith:arrSharedWith, shared:true}});
                 }
 
             }

@@ -21,8 +21,31 @@ if(Meteor.isClient) {
             }
         }, getDefaultnotebook: function () {
 
-        }
+            if (colNotebook.getTotalCount() <=0 ){
+                //colNotebook.createNotebook('First Notebook');
+                //return colNotebook.getNotebookList();
+                return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
 
+            }else
+            {
+                return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
+
+            }
+
+
+        }, getTotalCount : function(){
+            var nbcount = dbMongo.Notebook.find({ userid: Meteor.userId() }).count();
+            return nbcount;
+
+
+        }, getNotebookList : function () {
+
+            if (colNotebook.getTotalCount() <=0 ){
+//                colNotebook.createNotebook('First Notebook');
+            }
+
+            return dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch();
+        }
 
 
     });
