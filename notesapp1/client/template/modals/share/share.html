@@ -1,0 +1,33 @@
+<template name="shareModalTemplate">
+      <span class="glyphicon glyphicon-share" style="float:right;cursor:pointer" onclick="$('#shareModal').modal('show');"></span>
+    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="shareModalHeader">Share Note</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" id="shareEmails" type="text" name="sharename" placeholder="Name">
+                       <!-- <div class="checkbox">-->
+
+                                {{#each sharedSuggestion}}
+                                <div class="checkbox">
+                                    <input  type="checkbox" value="{{sharedWith}}" class="shareSuggestionCheckboxes">{{sharedWith}}
+                                </div>
+                                {{/each}}
+
+                       <!-- </div>-->
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="shareButton" class="btn btn-primary">Share</button>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</template>

@@ -64,13 +64,22 @@ if (Meteor.isClient) {
             })
         },
         'click #btnSaveNote':function(event,tpl){
+
             var notebookid=tpl.find("#selNotebook").value;
             var title=tpl.find("#txttitle").value;
             var content=tpl.find('#txteditor').value;
             var validTags = addTags(tpl.find("#tags"));
-            colNotes.createNotes(title,content,new Date(),new Date(),false,[],validTags,notebookid);
-            tpl.find("#txttitle").value="";
-            var editorObj = $("#txteditor").data('wysihtml5');
+
+            var sessionnoteid=Session.get('noteid');
+            if(sessionnoteid!=null && sessionnoteid!=""){
+                colNotes.updateNotes(sessionnoteid,notebookid,title,content);
+            }
+            else{
+                colNotes.createNotes(title,content,new Date(),new Date(),false,[],validTags,notebookid);
+            }
+
+            //colNotes.createNotes(title,content,new Date(),new Date(),false,[],validTags,notebookid);
+            tpl.find("#txttitle").value=""; var editorObj = $("#txteditor").data('wysihtml5');
             var editor = editorObj.editor;
             editor.setValue("");
             for(var i=0;i<validTags.length;i++)
