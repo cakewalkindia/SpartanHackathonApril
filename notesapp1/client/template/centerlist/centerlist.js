@@ -23,6 +23,16 @@ if(Meteor.isClient){
             var editor = editorObj.editor;
             editor.setValue(objnote[0].content);
 
+            var validTags=$("#tags")[0].value.split(',');
+            for(var i=0;i<validTags.length;i++) {
+                $("#tags").removeTag(validTags[i]);
+            }
+
+            var tags = objnote[0].tags;
+            $.each(tags, function(i,tag){
+                $("#tags").addTag(tag);
+            })
+
             var txttitle = $("#txttitle");
             txttitle.val(objnote[0].title);
         },
@@ -33,6 +43,7 @@ if(Meteor.isClient){
             Session.set("notebookid","");
             Session.set("noteid", "");
             tpl.find("#txtSearch").value="";
+            clearEditor();
             return colNotes.getNotesList();
         }
     });
@@ -42,4 +53,18 @@ if(Meteor.isClient){
         return moment(new Date(timestamp)).fromNow();
     });
 
+     function clearEditor(){
+         var editorObj = $("#txteditor").data('wysihtml5');
+         var editor = editorObj.editor;
+         editor.setValue('');
+
+         var validTags=$("#tags")[0].value.split(',');
+         for(var i=0;i<validTags.length;i++) {
+             $("#tags").removeTag(validTags[i]);
+         }
+
+         var txttitle = $("#txttitle");
+         txttitle.val('');
+
+     }
 }
