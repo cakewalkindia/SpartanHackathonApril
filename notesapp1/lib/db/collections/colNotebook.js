@@ -21,9 +21,11 @@ if(Meteor.isClient) {
             }
         }, getDefaultnotebookid: function () {
 
-            if (colNotebook.getTotalCount() <=0 ){
-                colNotebook.createNotebook('First Notebook');
 
+
+            if (colNotebook.getTotalCount() <=0 ){
+               // colNotebook.createNotebook('First Notebook');
+                return 0;
                 // return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch()._id;
 
             }

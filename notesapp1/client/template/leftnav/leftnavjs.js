@@ -16,7 +16,10 @@ if(Meteor.isClient){
         return colNotes.getTotalCount();
 
     },notebookList : function(){
-        return colNotebook.getNotebookList();
+
+            return colNotebook.getNotebookList();
+
+
     }, notebookscount : function(){
 
         return colNotebook.getTotalCount();
