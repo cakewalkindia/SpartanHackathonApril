@@ -9,7 +9,11 @@
 
                     {{/each}}
                 </select>
-                {{>shareModalTemplate}}
+
+                    <span class="label label-default" style="float:right;cursor:pointer;margin:5px" onclick="colHistory.getHistory();$('#divhistory').fadeIn()">History</span>
+                    {{> shareModalTemplate}}
+                <span class="glyphicon glyphicon-trash" style="float:right;cursor:pointer;margin:5px" onclick="colNotes.deleteNote();"></span>
+
             </div>
             <div class="panel-body">
                 <input type="text" id="txttitle" class="form-control" >
