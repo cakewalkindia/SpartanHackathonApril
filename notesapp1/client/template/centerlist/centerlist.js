@@ -53,15 +53,21 @@ if(Meteor.isClient){
             txttitle.val(objnote[0].title);
         },
         'click #btnSearch':function(event, tpl){
-            var strSeach = tpl.find("#txtSearch").value;
-            Session.set("seachvalue",strSeach);
-            Session.set("type","search");
-            Session.set("notebookid","");
-            Session.set("noteid", "");
-            tpl.find("#txtSearch").value="";
-            clearEditor();
-            collapseEditor();
-            return colNotes.getNotesList();
+            var strSearch = tpl.find("#txtSearch").value;
+            if(strSearch !="") {
+                Session.set("seachvalue", strSearch);
+                Session.set("type", "search");
+                Session.set("notebookid", "");
+                Session.set("noteid", "");
+                tpl.find("#txtSearch").value = "";
+                clearEditor();
+                collapseEditor();
+                return colNotes.getNotesList();
+            }else{
+                bootbox.alert("Please enter your search text.", function() {
+                    return;
+                });
+            }
         }
     });
 
@@ -74,12 +80,12 @@ if(Meteor.isClient){
          var editorObj = $("#txteditor").data('wysihtml5');
          var editor = editorObj.editor;
          editor.setValue('');
-
-         var validTags=$("#tags")[0].value.split(',');
-         for(var i=0;i<validTags.length;i++) {
-             $("#tags").removeTag(validTags[i]);
+         if($("#tags").length>0) {
+             var validTags = $("#tags")[0].value.split(',');
+             for (var i = 0; i < validTags.length; i++) {
+                 $("#tags").removeTag(validTags[i]);
+             }
          }
-
          var txttitle = $("#txttitle");
          txttitle.val('');
 

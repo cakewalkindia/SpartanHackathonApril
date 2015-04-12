@@ -51,14 +51,22 @@ if(Meteor.isClient){
             var name=tpl.find("#notebookName").value;
             //var name = $('#notebookName')[0].value;
             //
-            colNotebook.createNotebook(name);
 
-            // Clear form
-            $('#notebookName')[0].value = "";
-            $('#notebookModal').modal('hide');
-            clearEditor();
-            // Prevent default form submit
-            return false;
+            if(name !="") {
+                colNotebook.createNotebook(name);
+
+                // Clear form
+                $('#notebookName')[0].value = "";
+                $('#notebookModal').modal('hide');
+                clearEditor();
+                // Prevent default form submit
+                return false;
+            }
+            else{
+                bootbox.alert("Please enter notebook name.", function() {
+                    return;
+                });
+            }
         },
         "click .nb":function(event, tpl){
             var notebookid = event.currentTarget.id;
@@ -98,6 +106,10 @@ if(Meteor.isClient){
             clearEditor();
             collapseEditor();
             return colNotes.getNotesList();
+        },
+        "click .clsAddNote":function(){
+            clearEditor();
+            showEditor();
         }
     })
 
@@ -106,13 +118,16 @@ if(Meteor.isClient){
         var editor = editorObj.editor;
         editor.setValue('');
 
-        var validTags=$("#tags")[0].value.split(',');
-        for(var i=0;i<validTags.length;i++) {
-            $("#tags").removeTag(validTags[i]);
+        if($("#tags").length>0) {
+            var validTags = $("#tags")[0].value.split(',');
+            for (var i = 0; i < validTags.length; i++) {
+                $("#tags").removeTag(validTags[i]);
+            }
         }
-
         var txttitle = $("#txttitle");
         txttitle.val('');
+
+        Session.set("noteid","");
     }
 
     function collapseEditor(){

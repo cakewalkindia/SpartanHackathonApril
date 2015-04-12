@@ -2,10 +2,15 @@
 <template name="homeTemplate">
     <div class="container">
 
+
         <div class="panel">
-            <div class="panel-body">
-                {{>loginButtons }}
+            <div style="background-color: #F5F5F5;color: grey;height: 10%;padding: 20px 30px 25px 20px;">
+                <h1>Cakewalk Notes <small>from spartans....</small></h1>
+                <div  style="float: right;" >
+                    {{>loginButtons }}
+                </div>
             </div>
+
 {{#if currentUser}}
 
             <table border="0" cellpadding="2" cellspacing="4" width="100%"> <tr>
