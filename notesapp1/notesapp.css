@@ -11,6 +11,10 @@
     width: 99%;
     line-height: 2;
 }
+.checkbox{
+
+    margin-left:20px;
+}
 
 .panelLeft {
     width : 20%;

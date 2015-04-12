@@ -23,7 +23,11 @@ dbObjects = function(){
         tags:[],
         notebookid:"",
         userid:""
-    }
+    },
+        this.share={
+            sharedBy:"",
+            sharedWith:""
+        }
 
 }
 

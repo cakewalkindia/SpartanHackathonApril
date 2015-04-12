@@ -79,8 +79,7 @@ if (Meteor.isClient) {
             }
 
             //colNotes.createNotes(title,content,new Date(),new Date(),false,[],validTags,notebookid);
-            tpl.find("#txttitle").value="";
-            var editorObj = $("#txteditor").data('wysihtml5');
+            tpl.find("#txttitle").value=""; var editorObj = $("#txteditor").data('wysihtml5');
             var editor = editorObj.editor;
             editor.setValue("");
             for(var i=0;i<validTags.length;i++)
