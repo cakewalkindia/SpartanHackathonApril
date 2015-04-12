@@ -18,6 +18,7 @@ if (Meteor.isClient) {
             return colNotebook.getNotebookList();
         }
 
+
     })
 
 
@@ -36,6 +37,12 @@ if (Meteor.isClient) {
                     console.log(err);
                 })
             })
+        },
+        'click #btnSaveNote':function(event,tpl){
+            var notebookid=tpl.find("#selNotebook").value;
+            var title=tpl.find("#txttitle").value;
+            var content=tpl.find('#txteditor').value;
+            colNotes.createNotes(title,content,new Date(),new Date(),false,[],[],notebookid);
         }
     });
 }
