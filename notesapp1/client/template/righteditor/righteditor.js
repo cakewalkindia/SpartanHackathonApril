@@ -11,6 +11,17 @@ if (Meteor.isClient) {
      return NotesAttachment.find();
      }
      });*/
+
+
+    Template.righteditorTemplate.helpers({
+        notebookList : function(){
+            return colNotebook.getNotebookList();
+        }
+
+    })
+
+
+
     Template.righteditorTemplate.rendered = function(){
         $('#txteditor').wysihtml5();
     };

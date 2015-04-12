@@ -3,7 +3,13 @@
     <div class="panel panel-default">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Editor</h3>
+                <select id ="selNotebook">
+                    {{#each notebookList}}
+                      <option value={{_id}}>{{notebookname}}</option>
+
+                    {{/each}}
+                </select>
+                
             </div>
             <div class="panel-body">
                 <textarea id="txteditor" placeholder="Enter text ..." style="width: 100%;height: 100%"></textarea>
