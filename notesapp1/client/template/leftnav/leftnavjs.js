@@ -24,7 +24,11 @@ if(Meteor.isClient){
 
         return colNotebook.getTotalCount();
 
-    },
+    },sharedcount : function(){
+
+            return 0;
+
+        },
         notesinthebook : function(){
             return colNotebook.getNoteCountForNotebook(this._id);
         },

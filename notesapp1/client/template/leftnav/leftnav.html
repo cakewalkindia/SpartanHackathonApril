@@ -5,8 +5,12 @@
                 <span class="glyphicon glyphicon-folder"></span> <b>Actions</b>
             </a>
             <a href="#" class="list-group-item" onclick="$('#notebookModal').modal('show');">
-                <span class="glyphicon glyphicon-folder"></span>
+                <span class="glyphicon glyphicon-pin"></span>
                 Add Notebook
+            </a>
+            <a href="#" class="list-group-item" onclick="$('#helpModal').modal('show');">
+                <span class="glyphicon glyphicon-help"></span>
+                Help
             </a>
         </div>
         <div class="list-group">
@@ -24,7 +28,11 @@
 
 
         </div>
-
+    <div class="list-group">
+        <a href="#" class="list-group-item clsnotedisplay">
+            <span class="glyphicon glyphicon-share " ></span> <b>Shared</b> <span class="badge">{{sharedcount}}</span>
+        </a>
+    </div>
         <div class="list-group">
             <a href="#" class="list-group-item clsnotedisplay">
                 <span class="glyphicon glyphicon-file " ></span> <b>Notes</b> <span class="badge">{{notesCount}}</span>
