@@ -72,7 +72,7 @@ if(Meteor.isClient) {
                 editedBy=userEmail[0].emails[0].address;
             }
             var obj={title:_title,content:_content,tags:_tags,editedBy:editedBy,modifieddate:new Date()}
-            dbMongo.Notes.update({_id:_noteid},{$set:{title:obj.title,content:obj.title,tags:obj.tags,editedBy:editedBy} });
+            dbMongo.Notes.update({_id:_noteid},{$set:{title:obj.title,content:obj.content,tags:obj.tags,editedBy:editedBy} });
             dbMongo.Notes.update({_id:_noteid},{$push:{history:obj} });
 
             //dbMongo.Notes.update({_id:_noteid},{$set:{title:_title,content:_content,tags:_tags,editedBy:editedBy,$push:{history:dbObjects.history} }});
@@ -151,7 +151,9 @@ if (Meteor.isServer) {
                     }
 
 
-                    dbMongo.Notes.update({_id:_noteid},{$set:{title:_title,content:_content,tags:_tags,editedBy:editedBy,$push:{history:dbObjects().history} }});
+                    dbMongo.Notes.update({_id:_noteid},{$set:{title:_title,content:_content,tags:_tags,editedBy:editedBy }});
+                    dbMongo.Notes.update({$push:{history:dbObjects().history} });
+
                 },
                 'getNotesList':function(){
                     return dbMongo.Notes.find({userid : Meteor.userId()}).fetch();

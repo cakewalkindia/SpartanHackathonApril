@@ -24,10 +24,18 @@ if(Meteor.isClient){
             dbMongo.Share.insert({sharedBy:Meteor.userId(),sharedWith:emailArray[i]});
             }
 
-            for(k=0;k<emailArray.length;k++)
-            $("#shareEmails").removeTag(emailArray[k])
+
+
+            for(k=0;k<emailArray.length;k++){
+                emailSender.sendEmail(emailArray[k],noteid);
+                $("#shareEmails").removeTag(emailArray[k])
+            }
+
 
             $("#shareModal").modal('hide');
+
+
+
         }
     })
 
