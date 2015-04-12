@@ -6,11 +6,10 @@
             <div class="panel-body">
                 {{>loginButtons }}
             </div>
+{{#if currentUser}}
 
-
-            <table border="0" cellpadding="2" cellspacing="4" width="100%">
-                <tr>
-                    <td valign="top" class="panelLeft" >{{>leftnavTemplate}}</td>
+            <table border="0" cellpadding="2" cellspacing="4" width="100%"> <tr>
+                <td valign="top" class="panelLeft" >{{>leftnavTemplate}}</td>
                     <td valign="top" class="panelCenter">{{>centerlistTemplate}}</td>
                     <td valign="top" class="panelRight">{{>righteditorTemplate}}
                     {{> historytemplate}}
@@ -18,7 +17,13 @@
 
                 </tr>
             </table>
-
+{{else}}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Please login...
+        </div>
+    </div>
+    {{/if}}
 
         </div>
 

@@ -67,6 +67,7 @@ if(Meteor.isClient){
             Session.set("noteid", "");
             Session.set("tagname", "");
             clearEditor();
+            collapseEditor();
             return colNotes.getNotesList();
         },
 
@@ -76,6 +77,7 @@ if(Meteor.isClient){
             Session.set("noteid", "");
             Session.set("tagname", "");
             clearEditor();
+            collapseEditor();
             return colNotes.getNotesList();
         },
         "click .clsTagsNotes":function(event,tpl){
@@ -85,6 +87,7 @@ if(Meteor.isClient){
             Session.set("noteid", "");
             Session.set("tagname", tagname);
             clearEditor();
+            collapseEditor();
             return colNotes.getNotesList();
         },
         "click .clsSharedNote":function(event, tpl){
@@ -93,6 +96,7 @@ if(Meteor.isClient){
             Session.set("noteid", "");
             Session.set("tagname", "");
             clearEditor();
+            collapseEditor();
             return colNotes.getNotesList();
         }
     })
@@ -109,6 +113,20 @@ if(Meteor.isClient){
 
         var txttitle = $("#txttitle");
         txttitle.val('');
+    }
 
+    function collapseEditor(){
+        // $(".panelCenter").addClass("showEditor");
+        // $(".panelRight").addClass("collapseEditor");
+        $("#divEditor")[0].style.display="none";
+        $(".panelRight")[0].style.width="0%";
+        $(".panelCenter")[0].style.width="78%"
+    }
+    function showEditor(){
+        // $(".panelCenter").addClass("showEditor");
+        // $(".panelRight").addClass("collapseEditor");
+        $("#divEditor")[0].style.display="";
+        $(".panelRight")[0].style.width="50%";
+        $(".panelCenter")[0].style.width="28%"
     }
 }

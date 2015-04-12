@@ -110,7 +110,8 @@ if(Meteor.isClient) {
 
         },
         getNote:function(noteid){
-          var  note =  dbMongo.Notes.find({userid : Meteor.userId(), _id:noteid}).fetch();
+         // var  note =  dbMongo.Notes.find({userid : Meteor.userId(), _id:noteid}).fetch();
+            var  note =  dbMongo.Notes.find({ _id:noteid}).fetch();
             return note;
         },
         getTotalCount :function(){
