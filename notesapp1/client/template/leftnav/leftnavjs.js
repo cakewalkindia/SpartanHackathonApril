@@ -24,7 +24,13 @@ if(Meteor.isClient){
 
         return colNotebook.getTotalCount();
 
-    }
+    },
+        notesinthebook : function(){
+            return colNotebook.getNoteCountForNotebook(this._id);
+        },
+        tagCount : function(){
+            return colTags.getTotalTags();
+        }
     });
 
     Template.leftnavTemplate.events({

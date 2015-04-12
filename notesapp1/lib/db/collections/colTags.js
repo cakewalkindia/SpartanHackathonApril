@@ -26,6 +26,9 @@ if(Meteor.isClient) {
 
             return dbMongo.NotesTags.find({userid: Meteor.userId()}).fetch();
 
+        },
+        getTotalTags : function(){
+            return dbMongo.NotesTags.find({userid:Meteor.userId()}).count();
         }
 
 

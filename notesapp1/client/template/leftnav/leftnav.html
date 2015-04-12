@@ -17,7 +17,7 @@
            {{#each notebookList}}
 
                <a href="#" class="list-group-item nb" data-loading-text="Loading..."  id={{_id}} >
-                   <span class="glyphicon glyphicon-bookmark clsnotebook" ></span> {{notebookname}} <span class="badge">0</span>
+                   <span class="glyphicon glyphicon-bookmark clsnotebook" ></span> {{notebookname}} <span class="badge">{{notesinthebook}}</span>
                </a>
 
            {{/each}}
@@ -33,13 +33,13 @@
 
         <div class="list-group">
             <a href="#" class="list-group-item active">
-                <span class="glyphicon glyphicon-tags"></span> <b>Tags</b> <span class="badge">{{tagsCount}}</span>
+                <span class="glyphicon glyphicon-tags"></span> <b>Tags</b> <span class="badge">{{tagCount}}</span>
             </a>
 
            {{#each tagslist}}
 
                <a href="#" class="list-group-item" data-loading-text="Loading...">
-                   <span class="glyphicon glyphicon-unchecked"></span> {{tagname}} <span class="badge">0</span>
+                   <span class="glyphicon glyphicon-unchecked"></span> {{tagname}}
                </a>
 
            {{/each}}

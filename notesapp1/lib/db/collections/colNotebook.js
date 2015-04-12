@@ -40,7 +40,11 @@ if(Meteor.isClient) {
         }, getNotebookList : function () {
 
             return dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch();
+        },
+        getNoteCountForNotebook : function(id){
+           return  dbMongo.Notes.find({notebookid:id}).count();
         }
+
 
 
     });
