@@ -12,6 +12,22 @@ if(Meteor.isClient){
 
   });
 
+    Template.centerlistTemplate.events({
+        'click .clsnotes':function(event,tpl){
+           var noteid = event.currentTarget.id;
+            Session.set("noteid", noteid);
+            var objnote = colNotes.getNote(noteid);
+            var ddlnotebooklist = $("#selNotebook");
+            ddlnotebooklist.val(objnote[0].notebookid);
+            var editorObj = $("#txteditor").data('wysihtml5');
+            var editor = editorObj.editor;
+            editor.setValue(objnote[0].content);
+
+            var txttitle = $("#txttitle");
+            txttitle.val(objnote[0].title);
+        }
+    });
+
     Template.registerHelper("prettifyDate", function(timestamp) {
         return new Date(timestamp).toString('yyyy-MM-dd')
     });

@@ -19,19 +19,16 @@ if(Meteor.isClient) {
             } else {
                 alert('notbook with same name exists')
             }
-        }, getDefaultnotebook: function () {
+        }, getDefaultnotebookid: function () {
 
             if (colNotebook.getTotalCount() <=0 ){
                 colNotebook.createNotebook('First Notebook');
 
-                return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
-
-            }else
-            {
-                return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch();
+               // return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch()._id;
 
             }
-
+           // return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } })._id;
+            return dbMongo.Notebook.findOne({ userid: Meteor.userId() })._id;
 
         }, getTotalCount : function(){
             var nbcount = dbMongo.Notebook.find({ userid: Meteor.userId() }).count();

@@ -28,8 +28,22 @@ if(Meteor.isClient) {
         },
         getNotesList:function(){
             //Meteor.call('getNotesList');
-            return dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
+
+           var notebookid = Session.get("notebookid");
+            var noteslist;
+            if(notebookid =="" || typeof notebookid == "undefined"){
+                notebookid= colNotebook.getDefaultnotebookid();
+                Session.set("notebookid",notebookid);
+            }
+
+            noteslist =  dbMongo.Notes.find({userid : Meteor.userId(), notebookid:notebookid}).fetch();
+            Session.set("notelist", noteslist);
+            return Session.get("notelist");
           //  return dbMongo.Notes.find().fetch();
+        },
+        getNote:function(noteid){
+          var  note =  dbMongo.Notes.find({userid : Meteor.userId(), _id:noteid}).fetch();
+            return note;
         }
 
 

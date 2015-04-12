@@ -40,6 +40,12 @@ if(Meteor.isClient){
             $('#notebookModal').modal('hide');
             // Prevent default form submit
             return false;
+        },
+        "click .nb":function(event, tpl){
+            var notebookid = event.currentTarget.id;
+            Session.set("notebookid",notebookid);
+            Session.set("noteid", "");
+            return colNotes.getNotesList();
         }
     })
 }
