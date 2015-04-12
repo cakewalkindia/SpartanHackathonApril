@@ -16,6 +16,7 @@ if(Meteor.isClient){
         'click .clsnotes':function(event,tpl){
            var noteid = event.currentTarget.id;
             Session.set("noteid", noteid);
+            clearEditor();
             var objnote = colNotes.getNote(noteid);
             var ddlnotebooklist = $("#selNotebook");
             ddlnotebooklist.val(objnote[0].notebookid);
@@ -23,10 +24,10 @@ if(Meteor.isClient){
             var editor = editorObj.editor;
             editor.setValue(objnote[0].content);
 
-            var validTags=$("#tags")[0].value.split(',');
+           /** var validTags=$("#tags")[0].value.split(',');
             for(var i=0;i<validTags.length;i++) {
                 $("#tags").removeTag(validTags[i]);
-            }
+            }**/
 
             var tags = objnote[0].tags;
             $.each(tags, function(i,tag){

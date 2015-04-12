@@ -30,13 +30,13 @@ if(Meteor.isClient){
         },
         tagCount : function(){
             return colTags.getTotalTags();
+        },
+        tagsInNotes:function(){
+            return colNotes.getTagsInNotes(this.tagname);
         }
     });
 
     Template.leftnavTemplate.events({
-        "click #btnsubmit": function(){
-            colNotebook.createNotebook("testing notebook create");
-        },
 
         "click #createNotebook":function(event,tpl){
             var name=tpl.find("#notebookName").value;
@@ -47,6 +47,7 @@ if(Meteor.isClient){
             // Clear form
             $('#notebookName')[0].value = "";
             $('#notebookModal').modal('hide');
+            clearEditor();
             // Prevent default form submit
             return false;
         },
@@ -55,6 +56,7 @@ if(Meteor.isClient){
             Session.set("type","notebook");
             Session.set("notebookid",notebookid);
             Session.set("noteid", "");
+            clearEditor();
             return colNotes.getNotesList();
         },
 
@@ -62,7 +64,32 @@ if(Meteor.isClient){
             Session.set("type","notes");
             Session.set("notebookid","");
             Session.set("noteid", "");
+            clearEditor();
+            return colNotes.getNotesList();
+        },
+        "click .clsTagsNotes":function(event,tpl){
+            var tagname = event.currentTarget.getAttribute("data-tagname");
+            Session.set("type","tags");
+            Session.set("notebookid","");
+            Session.set("noteid", "");
+            Session.set("tagname", tagname);
+            clearEditor();
             return colNotes.getNotesList();
         }
     })
+
+    function clearEditor(){
+        var editorObj = $("#txteditor").data('wysihtml5');
+        var editor = editorObj.editor;
+        editor.setValue('');
+
+        var validTags=$("#tags")[0].value.split(',');
+        for(var i=0;i<validTags.length;i++) {
+            $("#tags").removeTag(validTags[i]);
+        }
+
+        var txttitle = $("#txttitle");
+        txttitle.val('');
+
+    }
 }
