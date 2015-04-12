@@ -25,9 +25,7 @@ if(Meteor.isClient){
         return colNotebook.getTotalCount();
 
     },sharedcount : function(){
-
             return 0;
-
         },
         notesinthebook : function(){
             return colNotebook.getNoteCountForNotebook(this._id);
@@ -37,6 +35,13 @@ if(Meteor.isClient){
         },
         tagsInNotes:function(){
             return colNotes.getTagsInNotes(this.tagname);
+        },
+        getSharedList:function(){
+            return colNotes.getSharedNotesList();
+        },
+        getSharedListCount:function(){
+           var sharedList = colNotes.getSharedNotesList();
+            return sharedList.length;
         }
     });
 
@@ -60,6 +65,7 @@ if(Meteor.isClient){
             Session.set("type","notebook");
             Session.set("notebookid",notebookid);
             Session.set("noteid", "");
+            Session.set("tagname", "");
             clearEditor();
             return colNotes.getNotesList();
         },
@@ -68,6 +74,7 @@ if(Meteor.isClient){
             Session.set("type","notes");
             Session.set("notebookid","");
             Session.set("noteid", "");
+            Session.set("tagname", "");
             clearEditor();
             return colNotes.getNotesList();
         },
@@ -77,6 +84,14 @@ if(Meteor.isClient){
             Session.set("notebookid","");
             Session.set("noteid", "");
             Session.set("tagname", tagname);
+            clearEditor();
+            return colNotes.getNotesList();
+        },
+        "click .clsSharedNote":function(event, tpl){
+            Session.set("type","sharedNote");
+            Session.set("notebookid","");
+            Session.set("noteid", "");
+            Session.set("tagname", "");
             clearEditor();
             return colNotes.getNotesList();
         }

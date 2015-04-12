@@ -92,7 +92,11 @@ if(Meteor.isClient) {
             }
             else if(type == "notes"){
                 noteslist =  dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
-            }else{
+            }
+            else if(type == "sharedNote"){
+                noteslist =  dbMongo.Notes.find({sharedWith:Meteor.user().emails[0].address}).fetch();
+            }
+            else{
                 var notebookid = Session.get("notebookid");
 
                 if(notebookid =="" || typeof notebookid == "undefined"){
@@ -114,6 +118,10 @@ if(Meteor.isClient) {
         },
         getTagsInNotes:function(tagname){
             return  dbMongo.Notes.find({userid : Meteor.userId(), tags:tagname}).count();
+        },
+        'getSharedNotesList':function(){
+             return dbMongo.Notes.find({sharedWith:Meteor.user().emails[0].address}).fetch();
+            //return dbMongo.Notes.find().fetch();
         }
 
 
@@ -150,12 +158,12 @@ if (Meteor.isServer) {
                         editedBy=userEmail;
                     }
 
-
                     dbMongo.Notes.update({_id:_noteid},{$set:{title:_title,content:_content,tags:_tags,editedBy:editedBy,$push:{history:dbObjects().history} }});
                 },
                 'getNotesList':function(){
                     return dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
                 }
+
 
             }
         )
