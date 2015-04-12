@@ -28,6 +28,29 @@ if(Meteor.isClient) {
             }
             Meteor.call('addNotes',db.notes);
         },
+        deleteNote:function(){
+            var noteid=Session.get('noteid');
+            if(noteid!=null || noteid!=""){
+                var notesUserId =dbMongo.Notes.find({_id:noteid}).fetch();
+                if(notesUserId[0].userid!=Meteor.userId())
+                {
+                    bootbox.alert("You do not have permission to delete this note.", function() {
+                        return;
+                    });
+                    return;
+                }
+                else{
+
+                    bootbox.confirm("Are you sure want to delete note?", function(result) {
+                        if(result){
+                            dbMongo.Notes.remove({_id:noteid});
+                        }
+                    });
+                }
+            }
+
+
+        },
         updateNotes:function(_noteid,_notebookid,_title,_content){
         var _tags=colTags.getTagsToAssign();
            // Meteor.call('updateNotes',_noteid,_notebookid,_title,_content,_tags);
