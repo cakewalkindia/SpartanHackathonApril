@@ -7,7 +7,8 @@ dbMongo = ({
     NotesTags  : new Mongo.Collection('notestags'),
     NotesHistory : new Mongo.Collection('noteshistory'),
     NotesAttachment : new Mongo.Collection('notesattachment'),
-    NotesShared : new Mongo.Collection('notesshared')
+    NotesShared : new Mongo.Collection('notesshared'),
+    Share : new Mongo.Collection('share')
 })
 
 
