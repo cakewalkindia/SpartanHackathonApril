@@ -22,6 +22,10 @@ if(Meteor.isClient) {
             db.notes.notebookid = _notebookid;
             db.notes.userid = Meteor.userId();
             db.notes.editedBy="You";
+            if(_notebookid!=null &&  _notebookid==""){
+                colNotebook.createNotebook('First Notebook');
+                db.notes.notebookid= dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch()[0]._id;
+            }
             Meteor.call('addNotes',db.notes);
         },
         updateNotes:function(_noteid,_notebookid,_title,_content){
