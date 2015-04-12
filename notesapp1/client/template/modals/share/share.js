@@ -9,7 +9,9 @@ if(Meteor.isClient){
         "click #shareButton":function(event,tpl){
             var noteid = Session.get("noteid");
             var emails = tpl.find("#shareEmails").value;
-            var emailArray=emails.split(',');
+            emailArray=[]
+            if(emails.length>0)
+            emailArray=emails.split(',');
             var checkArray = $(".shareSuggestionCheckboxes");
             for(var j=0;j<checkArray.length;j++){
                 if(checkArray[j].checked==true)
