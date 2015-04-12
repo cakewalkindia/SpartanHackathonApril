@@ -29,17 +29,26 @@ if(Meteor.isClient) {
         getNotesList:function(){
             //Meteor.call('getNotesList');
 
-           var notebookid = Session.get("notebookid");
+            var type = Session.get("type");
             var noteslist;
-            if(notebookid =="" || typeof notebookid == "undefined"){
-                notebookid= colNotebook.getDefaultnotebookid();
-                Session.set("notebookid",notebookid);
+            if(type=="search"){
+                var strSearch = Session.get("seachvalue");
+                noteslist = dbMongo.Notes.find({$or:[{title:{$regex:strSearch}},{content:{$regex:strSearch}},{sharedWith:{$regex:strSearch}}]}).fetch();
             }
+            else if(type == "note"){
+                noteslist =  dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
+            }else{
+                var notebookid = Session.get("notebookid");
 
-            noteslist =  dbMongo.Notes.find({userid : Meteor.userId(), notebookid:notebookid}).fetch();
+                if(notebookid =="" || typeof notebookid == "undefined"){
+                    notebookid= colNotebook.getDefaultnotebookid();
+                    Session.set("notebookid",notebookid);
+                }
+                noteslist =  dbMongo.Notes.find({userid : Meteor.userId(), notebookid:notebookid}).fetch();
+            }
             Session.set("notelist", noteslist);
             return Session.get("notelist");
-          //  return dbMongo.Notes.find().fetch();
+
         },
         getNote:function(noteid){
           var  note =  dbMongo.Notes.find({userid : Meteor.userId(), _id:noteid}).fetch();

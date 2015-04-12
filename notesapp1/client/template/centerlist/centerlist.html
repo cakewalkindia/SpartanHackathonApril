@@ -1,19 +1,33 @@
 <template name="centerlistTemplate">
 
-    {{#each  notes}}
-        <div class="list-group clsnotes" id={{_id}} >
-            <a href="#" class="list-group-item ">
-                <h4 class="list-group-item-heading">{{title}}</h4>
-                <p class="list-group-item-text">{{content}}</p>
-                <small> <i> {{prettifyDate modifieddate}}</i> </small>
-            </a>
+    <div style="height: 10%;width: 100%;">
+        <div class="col-lg-6 clsNoteSearch">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." id="txtSearch" >
+                  <span class="input-group-btn">
+                       <button class="btn btn-default" type="button" id="btnSearch">Go!</button>
+                  </span>
+            </div>
         </div>
-    {{else}}
-        <div class="list-group">
-            <a href="#" class="list-group-item ">
-                <h4 class="list-group-item-heading">No Data</h4>
+    </div>
 
-            </a>
-        </div>
-    {{/each}}
+    <div style="height: 90%;width: 100%;float:left;">
+        {{#each  notes}}
+            <div class="list-group clsnotes" id={{_id}} >
+                <a href="#" class="list-group-item ">
+                    <h4 class="list-group-item-heading">{{title}}</h4>
+                    <p class="list-group-item-text">{{content}}</p>
+                    <small> <i> {{prettifyDate modifieddate}}</i> </small>
+                </a>
+            </div>
+        {{else}}
+            <div class="list-group">
+                <a href="#" class="list-group-item ">
+                    <h4 class="list-group-item-heading">No Data</h4>
+
+                </a>
+            </div>
+        {{/each}}
+    </div>
+
 </template>

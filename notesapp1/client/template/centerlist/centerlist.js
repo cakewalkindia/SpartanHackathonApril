@@ -25,6 +25,15 @@ if(Meteor.isClient){
 
             var txttitle = $("#txttitle");
             txttitle.val(objnote[0].title);
+        },
+        'click #btnSearch':function(event, tpl){
+            var strSeach = tpl.find("#txtSearch").value;
+            Session.set("seachvalue",strSeach);
+            Session.set("type","search");
+            Session.set("notebookid","");
+            Session.set("noteid", "");
+            tpl.find("#txtSearch").value="";
+            return colNotes.getNotesList();
         }
     });
 

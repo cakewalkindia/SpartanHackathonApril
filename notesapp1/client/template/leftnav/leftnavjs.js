@@ -43,7 +43,15 @@ if(Meteor.isClient){
         },
         "click .nb":function(event, tpl){
             var notebookid = event.currentTarget.id;
+            Session.set("type","notebook");
             Session.set("notebookid",notebookid);
+            Session.set("noteid", "");
+            return colNotes.getNotesList();
+        },
+
+        "click .clsnotedisplay" : function(event,tpl){
+            Session.set("type","notes");
+            Session.set("notebookid","");
             Session.set("noteid", "");
             return colNotes.getNotesList();
         }
