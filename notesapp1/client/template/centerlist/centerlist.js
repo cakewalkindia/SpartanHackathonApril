@@ -8,6 +8,20 @@ if(Meteor.isClient){
          var noteList = colNotes.getNotesList();
          Session.set("notelist",noteList);
           return Session.get("notelist");
+      },
+      displayfixedlengthstring:function(str){
+          return str.substr(0,100)+"...";
+
+
+         // var tempStr = str.substr(0,100);
+        //  var count=0;
+        //  for(i=tempStr.length;i=25;i--){
+             // if(tempStr[i-1] == " "){
+               //   count=i;
+               //   break;
+            //  }
+        //  }
+         // return str.substr(0,count)+"...";
       }
 
   });

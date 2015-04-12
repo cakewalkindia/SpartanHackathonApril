@@ -15,8 +15,8 @@
         {{#each  notes}}
             <div class="list-group clsnotes" id={{_id}} >
                 <a href="#" class="list-group-item ">
-                    <h4 class="list-group-item-heading">{{title}}</h4>
-                    <p class="list-group-item-text">{{{content}}}</p>
+                    <h4 class="list-group-item-heading clsTitle">{{title}}</h4>
+                    <p class="list-group-item-text">  {{{displayfixedlengthstring content}}} </p>
                     <small> <i> {{prettifyDate modifieddate}}</i> </small>
                 </a>
             </div>
