@@ -16,3 +16,4 @@ mrt:bootstrap3-wysihtml5
 email
 iron:router
 jquery
+mrt:moment

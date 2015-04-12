@@ -38,7 +38,8 @@ if(Meteor.isClient){
     });
 
     Template.registerHelper("prettifyDate", function(timestamp) {
-        return new Date(timestamp).toString('yyyy-MM-dd')
+       // return new Date(timestamp).toString('yyyy-MM-dd')
+        return moment(new Date(timestamp)).fromNow();
     });
 
 }
