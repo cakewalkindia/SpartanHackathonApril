@@ -26,6 +26,25 @@ if(Meteor.isClient) {
 
             return dbMongo.NotesTags.find({userid: Meteor.userId()}).fetch();
 
+        },
+        getTagsToAssign:function(){
+
+            var tagElements = $('#tags').val();
+            var tagsArray = tagElements.split(',')
+
+            for(var i=0;i<tagsArray.length;i++){
+                //Insert each tag using tagsArray[i]
+
+                var existingTagLength = dbMongo.NotesTags.find({$and:[{userid:Meteor.userId()}, {tagname:tagsArray[i]}]}).count();
+                if(existingTagLength==0){
+                    colTags.createTag(tagsArray[i]);
+
+                }
+                else
+                    continue;
+            }
+
+            return tagsArray;
         }
 
 

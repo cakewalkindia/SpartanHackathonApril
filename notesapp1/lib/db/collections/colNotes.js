@@ -21,10 +21,34 @@ if(Meteor.isClient) {
             db.notes.tags = _tags;
             db.notes.notebookid = _notebookid;
             db.notes.userid = Meteor.userId();
+            db.notes.editedBy="You";
             Meteor.call('addNotes',db.notes);
         },
-        updateNotes:function(_noteid,_sharedWith){
-            Meteor.call('updateNotes',_noteid,_sharedWith);
+        updateNotes:function(_noteid,_notebookid,_title,_content){
+        var _tags=colTags.getTagsToAssign();
+           // Meteor.call('updateNotes',_noteid,_notebookid,_title,_content,_tags);
+
+            //dbObjects.history.title=_title;
+            //dbObjects.history.content=_content;
+            //dbObjects.history.tags=_tags;
+            //dbObjects.history.editedBy=_editedBy;
+            //dbObjects.history.modifieddate=new Date();
+
+            var editedBy="";
+            var notesUserId =dbMongo.Notes.find({_id:_noteid}).fetch();
+            if(notesUserId[0].userid==Meteor.userId())
+            {
+                editedBy="You";
+            }
+            else{
+                var userEmail=Meteor.users.find({_id:Meteor.userId()}).fetch();
+                editedBy=userEmail[0].emails[0].address;
+            }
+            var obj={title:_title,content:_content,tags:_tags,editedBy:editedBy,modifieddate:new Date()}
+            dbMongo.Notes.update({_id:_noteid},{$set:{title:obj.title,content:obj.title,tags:obj.tags,editedBy:editedBy} });
+            dbMongo.Notes.update({_id:_noteid},{$push:{history:obj} });
+
+            //dbMongo.Notes.update({_id:_noteid},{$set:{title:_title,content:_content,tags:_tags,editedBy:editedBy,$push:{history:dbObjects.history} }});
         },
         getNotesList:function(){
             //Meteor.call('getNotesList');
@@ -70,14 +94,27 @@ if (Meteor.isServer) {
                 'addNotes': function (objNote) {
                     dbMongo.Notes.insert(objNote);
                 },
-                'updateNotes':function(_noteid,_sharedWith){
-                    var arrSharedWith = dbMongo.Notes.find({_id:_noteid}).fetch().sharedWith;
-                    $.each(_sharedWith, function(i,id){
-                        if(arrSharedWith.indexOf(id) == -1){
-                            arrSharedWith.push(id);
-                        }
-                    });
-                    dbMongo.Notes.update({_id:_noteid},{$set:{sharedWith:arrSharedWith, shared:true}});
+                'updateNotes':function(_noteid,_notebookid,_title,_content,_tags){
+
+                    dbObjects.history.title=_title;
+                    dbObjects.history.content=_content;
+                    dbObjects.history.tags=_tags;
+                    dbObjects.history.editedBy=_editedBy;
+                    dbObjects.history.modifieddate=new Date();
+
+                    var editedBy="";
+                    var notesUserId =dbMongo.Notes.find({_id:_noteid}).userid;
+                    if(notesUserId==Meteor.userId())
+                    {
+                        editedBy="You";
+                    }
+                    else{
+                        var userEmail=Meteor.users.find({_id:Meteor.userId()}).fetch().email[0].address;
+                        editedBy=userEmail;
+                    }
+
+
+                    dbMongo.Notes.update({_id:_noteid},{$set:{title:_title,content:_content,tags:_tags,editedBy:editedBy,$push:{history:dbObjects().history} }});
                 },
                 'getNotesList':function(){
                     return dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
