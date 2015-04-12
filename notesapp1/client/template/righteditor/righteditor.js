@@ -26,7 +26,9 @@ if (Meteor.isClient) {
     })
 
     function addTags(tagElement){
-
+            if(tagElement==null || tagElement==""){
+                return;
+            }
             var string = tagElement.value;
             var tagsArray = string.split(',')
 
@@ -53,7 +55,7 @@ if (Meteor.isClient) {
     };
     Template.righteditorTemplate.events({
 
-        'change .fileInput':function(event,template){
+        'change #btnfileUpload':function(event,template){
             FS.Utility.eachFile(event,function(file){
                 var fileObj=new FS.File(file);
                 /*NotesAttachment.insert({NoteId:'1', Name:fileObj.original,Attachment_Path:'C:/projectUploads',UserId:Meteor.userId()},function(err){
@@ -68,17 +70,24 @@ if (Meteor.isClient) {
             var notebookid=tpl.find("#selNotebook").value;
             var title=tpl.find("#txttitle").value;
             var content=tpl.find('#txteditor').value;
-            var validTags = addTags(tpl.find("#tags"));
+            if(title==null || title.trim()==""){
+                bootbox.alert("Please enter title for this note.", function() {  });
+                return;
+            }
+            else if(content==null || content.trim()==""){
+                bootbox.alert("Please enter content for this note.", function() { });
+                return;
+            }
 
+            var validTags = addTags(tpl.find("#tags"));
             var sessionnoteid=Session.get('noteid');
             if(sessionnoteid!=null && sessionnoteid!=""){
                 colNotes.updateNotes(sessionnoteid,notebookid,title,content);
             }
-            else{
+            else  {
                 colNotes.createNotes(title,content,new Date(),new Date(),false,[],validTags,notebookid);
             }
 
-            //colNotes.createNotes(title,content,new Date(),new Date(),false,[],validTags,notebookid);
             tpl.find("#txttitle").value=""; var editorObj = $("#txteditor").data('wysihtml5');
             var editor = editorObj.editor;
             editor.setValue("");

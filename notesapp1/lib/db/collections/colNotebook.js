@@ -11,13 +11,18 @@ if(Meteor.isClient) {
             return nbcount > 0 ? true : false;
         },
         createNotebook: function (_notebookname) {
+            if(_notebookname.trim()=="" || _notebookname==null){
+                bootbox.alert("Please enter notebook name.", function() { });
+                return;
+            }
             if (colNotebook.notebookExist() == false) {
                 var db = new dbObjects();
                 db.notebook.notebookname = _notebookname;
                 db.notebook.userid = Meteor.userId();
                 Meteor.call('addNotebooks',db.notebook);
             } else {
-                alert('notbook with same name exists')
+                bootbox.alert("notebook with same name exists.", function() { });
+
             }
         }, getDefaultnotebookid: function () {
 

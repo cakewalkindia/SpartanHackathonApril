@@ -24,7 +24,8 @@ if(Meteor.isClient) {
             db.notes.editedBy="You";
             if(_notebookid!=null &&  _notebookid==""){
                 colNotebook.createNotebook('First Notebook');
-                db.notes.notebookid= dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch()[0]._id;
+                Meteor.setTimeout(function(){  db.notes.notebookid= dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch()[0]._id; }, 10000);
+
             }
             Meteor.call('addNotes',db.notes);
         },
@@ -35,7 +36,6 @@ if(Meteor.isClient) {
                 if(notesUserId[0].userid!=Meteor.userId())
                 {
                     bootbox.alert("You do not have permission to delete this note.", function() {
-                        return;
                     });
                     return;
                 }

@@ -8,6 +8,9 @@ if(Meteor.isClient){
 
         "click #shareButton":function(event,tpl){
             var noteid = Session.get("noteid");
+            if(noteid==null || noteid==''){
+                return;
+            }
             var emails = tpl.find("#shareEmails").value;
             emailArray=[]
             if(emails.length>0)
