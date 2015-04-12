@@ -59,11 +59,15 @@ if(Meteor.isClient) {
 
             var type = Session.get("type");
             var noteslist;
-            if(type=="search"){
+            if(type=='tags'){
+                var tagname =  Session.get("tagname");
+                return  dbMongo.Notes.find({userid : Meteor.userId(), tags:tagname}).fetch();
+            }
+            else if(type=="search"){
                 var strSearch = Session.get("seachvalue");
                 noteslist = dbMongo.Notes.find({$or:[{title:{$regex:strSearch}},{content:{$regex:strSearch}},{sharedWith:{$regex:strSearch}}]}).fetch();
             }
-            else if(type == "note"){
+            else if(type == "notes"){
                 noteslist =  dbMongo.Notes.find({userid : Meteor.userId()}).fetch();
             }else{
                 var notebookid = Session.get("notebookid");
@@ -81,6 +85,12 @@ if(Meteor.isClient) {
         getNote:function(noteid){
           var  note =  dbMongo.Notes.find({userid : Meteor.userId(), _id:noteid}).fetch();
             return note;
+        },
+        getTotalCount :function(){
+            return  dbMongo.Notes.find({userid : Meteor.userId()}).count();
+        },
+        getTagsInNotes:function(tagname){
+            return  dbMongo.Notes.find({userid : Meteor.userId(), tags:tagname}).count();
         }
 
 

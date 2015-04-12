@@ -38,8 +38,8 @@
 
            {{#each tagslist}}
 
-               <a href="#" class="list-group-item" data-loading-text="Loading...">
-                   <span class="glyphicon glyphicon-unchecked"></span> {{tagname}}
+               <a href="#" class="list-group-item clsTagsNotes" data-loading-text="Loading..." data-tagname={{tagname}} >
+                   <span class="glyphicon glyphicon-unchecked"></span> {{tagname}} <span class="badge">{{tagsInNotes}}</span>
                </a>
 
            {{/each}}
