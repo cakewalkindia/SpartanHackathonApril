@@ -27,7 +27,7 @@
 
 
 .panelCenter {
-    width : 28%;
+    width : 78%;
     height: auto;
     /*border: solid;
     border-width: 2px;*/
@@ -37,7 +37,7 @@
 
 
 .panelRight {
-    width : 50%;
+    width : 0%;
     height: auto;
 
     float: right;
@@ -51,5 +51,11 @@
 
 .clsTitle{
    font-weight: bold !important;
+}
+.showEditor{
+    width: 50% !important;
+}
+.collapseEditor{
+    width:80% !important;
 }
 

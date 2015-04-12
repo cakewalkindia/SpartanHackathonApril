@@ -31,6 +31,7 @@ if(Meteor.isClient){
            var noteid = event.currentTarget.id;
             Session.set("noteid", noteid);
             clearEditor();
+            showEditor();
             var objnote = colNotes.getNote(noteid);
             var ddlnotebooklist = $("#selNotebook");
             ddlnotebooklist.val(objnote[0].notebookid);
@@ -59,6 +60,7 @@ if(Meteor.isClient){
             Session.set("noteid", "");
             tpl.find("#txtSearch").value="";
             clearEditor();
+            collapseEditor();
             return colNotes.getNotesList();
         }
     });
@@ -82,4 +84,19 @@ if(Meteor.isClient){
          txttitle.val('');
 
      }
+
+    function collapseEditor(){
+       // $(".panelCenter").addClass("showEditor");
+       // $(".panelRight").addClass("collapseEditor");
+        $("#divEditor")[0].style.display="none";
+        $(".panelRight")[0].style.width="0%";
+        $(".panelCenter")[0].style.width="78%"
+    }
+    function showEditor(){
+        // $(".panelCenter").addClass("showEditor");
+        // $(".panelRight").addClass("collapseEditor");
+        $("#divEditor")[0].style.display="";
+        $(".panelRight")[0].style.width="50%";
+        $(".panelCenter")[0].style.width="28%"
+    }
 }
