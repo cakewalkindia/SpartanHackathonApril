@@ -21,13 +21,15 @@ if(Meteor.isClient) {
             }
         }, getDefaultnotebookid: function () {
 
-            if (colNotebook.getTotalCount() <=0 ){
-                colNotebook.createNotebook('First Notebook');
 
-               // return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch()._id;
+
+            if (colNotebook.getTotalCount() <=0 ){
+               // colNotebook.createNotebook('First Notebook');
+                return 0;
+                // return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } }).fetch()._id;
 
             }
-           // return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } })._id;
+            // return dbMongo.Notebook.findOne({ userid: Meteor.userId() ,sort : { _id : 0 } })._id;
             return dbMongo.Notebook.findOne({ userid: Meteor.userId() })._id;
 
         }, getTotalCount : function(){
@@ -36,11 +38,6 @@ if(Meteor.isClient) {
 
 
         }, getNotebookList : function () {
-
-            if (colNotebook.getTotalCount() <=0 ){
-                colNotebook.createNotebook("First Notebook");
-
-            }
 
             return dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch();
         }
@@ -57,6 +54,17 @@ if (Meteor.isServer) {
         Meteor.methods({
                 'addNotebooks': function (objNotebook) {
                     dbMongo.Notebook.insert(objNotebook);
+                },
+                'getNotebookList' : function (){
+
+                    return "getnotebooklist";
+
+                    if (colNotebook.getTotalCount() <=0 ){
+                        colNotebook.createNotebook("First Notebook");
+
+                    }
+
+                    return dbMongo.Notebook.find({ userid: Meteor.userId() }).fetch();
                 }
 
             }
