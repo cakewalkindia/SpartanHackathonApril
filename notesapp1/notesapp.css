@@ -3,6 +3,10 @@
     width: 99%;
 }
 
+*{
+    font-family:'Lato';
+}
+
 .list-group2{
     width: 99%;
     line-height: 2;

@@ -15,16 +15,41 @@ if (Meteor.isClient) {
 
     Template.righteditorTemplate.helpers({
         notebookList : function(){
+
             return colNotebook.getNotebookList();
+
         }
+
+
 
 
     })
 
+    function addTags(tagElement){
+
+            var string = tagElement.value;
+            var tagsArray = string.split(',')
+
+            for(var i=0;i<tagsArray.length;i++){
+                //Insert each tag using tagsArray[i]
+
+                var existingTagLength = dbMongo.NotesTags.find({$and:[{userid:Meteor.userId()}, {tagname:tagsArray[i]}]}).count();
+                if(existingTagLength==0){
+                    colTags.createTag(tagsArray[i]);
+
+                }
+                else
+                    continue;
+            }
+
+            return tagsArray;
+
+    }
 
 
     Template.righteditorTemplate.rendered = function(){
         $('#txteditor').wysihtml5();
+        $("#tags").tagsInput({'height': '50px','width':'100%'})
     };
     Template.righteditorTemplate.events({
 
@@ -42,7 +67,14 @@ if (Meteor.isClient) {
             var notebookid=tpl.find("#selNotebook").value;
             var title=tpl.find("#txttitle").value;
             var content=tpl.find('#txteditor').value;
-            colNotes.createNotes(title,content,new Date(),new Date(),false,[],[],notebookid);
+            var validTags = addTags(tpl.find("#tags"));
+            colNotes.createNotes(title,content,new Date(),new Date(),false,[],validTags,notebookid);
+            tpl.find("#txttitle").value="";
+            var editorObj = $("#txteditor").data('wysihtml5');
+            var editor = editorObj.editor;
+            editor.setValue("");
+            for(var i=0;i<validTags.length;i++)
+                $("#tags").removeTag(validTags[i]);
         }
     });
 }
